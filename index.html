@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0f14" />
+    <title>Midnight Masquerade — Premium Costumes</title>
+
+    <!-- Modern fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="/">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="#111827" />
+            <path d="M6 12 L12 6 L18 12 L12 18 Z" fill="#A78BFA" />
+          </svg>
+          <span class="brand">Midnight Masquerade</span>
+        </a>
+
+        <div class="header-actions">
+          <div class="search">
+            <input id="searchInput" aria-label="Search costumes" placeholder="Search costumes, themes..." />
+            <button class="btn-ghost" aria-label="Search">🔍</button>
+          </div>
+
+          <nav class="nav-icons" aria-label="User actions">
+            <button class="icon-btn" title="Wishlist" aria-label="Wishlist">♡</button>
+            <button class="icon-btn" title="Account" aria-label="Account">👤</button>
+            <button id="cartBtn" class="cart-btn" title="Cart" aria-label="Cart: 0 items">
+              🛒
+              <span id="cartCount" class="cart-count" aria-hidden="true">0</span>
+            </button>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-left">
+            <h1 class="hero-title">Dress the Part. Steal the Night.</h1>
+            <p class="hero-sub">Curated premium costumes, handcrafted details, and limited-run pieces for your standout moments.</p>
+            <div class="hero-cta">
+              <a class="btn-primary" href="#catalog">Shop Collection</a>
+              <a class="btn-ghost" href="#about">About the Brand</a>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <div class="card-glass hero-card">
+              <div class="tag">New Drop</div>
+              <div class="preview">
+                <img src="/images/vampire.jpg" alt="Featured costume preview" />
+              </div>
+              <div class="meta">
+                <strong>Nocturne Count</strong>
+                <span>$149</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="container">
+        <h2 class="section-title">Curated Collections</h2>
+
+        <div id="catalog" class="product-grid" role="list">
+          <!-- Product cards inserted by app.js -->
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <strong>Midnight Masquerade</strong>
+          <p class="muted">Crafted costumes • Limited drops • Worldwide shipping</p>
+        </div>
+
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#shipping">Shipping</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div class="lower">
+        <span class="muted">© <span id="year"></span> Midnight Masquerade — All rights reserved</span>
+      </div>
+    </footer>
+
+    <!-- Modal (hidden by default) -->
+    <div id="productModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;">
+      <div class="modal-card glass" role="document" aria-label="Product details">
+        <button id="modalClose" class="modal-close" aria-label="Close">✕</button>
+        <div class="modal-grid">
+          <div class="modal-media">
+            <img id="modalImage" src="" alt="" />
+          </div>
+          <div class="modal-content">
+            <h2 id="modalTitle">Product</h2>
+            <p id="modalPrice" class="muted">$0</p>
+            <p id="modalDesc"></p>
+            <div class="modal-actions">
+              <button id="modalAdd" class="btn-primary">Add to cart</button>
+              <button id="modalContinue" class="btn-ghost">Continue shopping</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
