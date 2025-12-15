@@ -1,0 +1,540 @@
+:root{
+  /* Color palette - Nike-style black & white */
+  --bg: #000000;            /* pure black background */
+  --surface: #0d0d0d;       /* slightly lighter panel */
+  --panel-weak: rgba(255,255,255,0.03);
+  --text: #ffffff;          /* primary text - white */
+  --muted: #bfbfbf;         /* light gray muted text */
+  --muted-2: #9e9e9e;
+  --border: rgba(255,255,255,0.06);
+
+  /* Semantic (neutral only) */
+  --success: #ffffff;
+  --danger: #ffffff;
+
+  /* Spacing scale */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* Subtle shadows (very light, minimal) */
+  --shadow-subtle: 0 8px 20px rgba(0,0,0,0.6);
+  --shadow-min: 0 6px 18px rgba(0,0,0,0.6);
+
+  /* Transitions */
+  --ease: cubic-bezier(.2,.9,.23,1);
+  --fast: 160ms var(--ease);
+  --mid: 260ms var(--ease);
+  --slow: 420ms var(--ease);
+
+  /* Breakpoints */
+  --bp-sm: 700px;
+  --bp-lg: 1100px;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  :root { --fast: 0ms; --mid: 0ms; --slow: 0ms; }
+}
+
+/* Base */
+* { box-sizing: border-box; }
+html,body { height: 100%; }
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background-color: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.45;
+  font-size: 15px;
+  letter-spacing: 0.1px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Container util */
+.container { width: 92%; max-width: 1200px; margin: 0 auto; }
+
+/* Links */
+a { color: inherit; text-decoration: none; }
+
+/* Buttons baseline */
+button {
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: inherit;
+  transition: transform var(--fast), box-shadow var(--fast), opacity var(--fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure comfortable tap targets by default */
+button, .icon-btn, .cart-btn, .fav, .card-controls .btn {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 10px 12px;
+  touch-action: manipulation;
+}
+
+/* Focus outlines */
+:focus { outline: none; }
+:focus-visible {
+  box-shadow: 0 0 0 4px rgba(255,255,255,0.06);
+  border-radius: 8px;
+}
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  backdrop-filter: none;
+  background-color: rgba(13,13,13,0.96);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  display:flex;
+  gap: var(--space-sm);
+  align-items:center;
+  justify-content:space-between;
+  padding: var(--space-sm) 0;
+}
+.logo { display:flex; align-items:center; gap:12px; text-decoration: none; color:inherit; }
+.brand {
+  font-family: "Poppins", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.2px;
+}
+
+/* Header actions */
+.header-actions { display:flex; gap: var(--space-sm); align-items:center; }
+.search {
+  display:flex;
+  align-items:center;
+  background: var(--panel-weak);
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  transition: box-shadow var(--fast), transform var(--fast);
+}
+.search:focus-within { box-shadow: 0 8px 20px rgba(255,255,255,0.02); transform: translateY(-1px); }
+.search input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  padding: 6px 8px;
+  width: 160px;
+  font-size: 14px;
+}
+
+/* Ghost button */
+.btn-ghost {
+  background: transparent;
+  color: var(--muted);
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+}
+.btn-ghost:hover { color: var(--text); transform: translateY(-2px); border-color: var(--border); }
+
+/* Icon groups */
+.nav-icons { display:flex; gap:8px; align-items:center; }
+.icon-btn, .cart-btn {
+  background: var(--panel-weak);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 8px;
+  border-radius: 10px;
+  color: var(--muted);
+  transition: transform var(--fast), box-shadow var(--fast), color var(--fast);
+}
+.icon-btn:hover, .cart-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-min);
+  color: var(--text);
+}
+.cart-count {
+  display: inline-block;
+  background: #ffffff;
+  color: #000000;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+/* Hero */
+.hero { padding: var(--space-xl) 0 var(--space-lg); }
+.hero-grid {
+  display: grid;
+  gap: var(--space-lg);
+  align-items: center;
+  grid-template-columns: 1fr;
+}
+.hero-left { max-width: 720px; }
+.hero-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 28px;
+  margin: 0;
+  line-height: 1.02;
+  color: var(--text);
+  letter-spacing: -0.4px;
+  font-weight: 700;
+}
+.hero-sub {
+  color: var(--muted);
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+/* CTAs */
+.hero-cta { margin-top: 18px; display:flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  background: transparent;
+  color: var(--muted);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+.btn:hover { color: var(--text); transform: translateY(-3px); box-shadow: none; border-color: var(--border); }
+
+/* Primary button - white filled with black text for high contrast */
+.btn-primary {
+  background: #ffffff;
+  color: #000000;
+  padding: 10px 16px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+  transition: transform var(--mid), box-shadow var(--mid);
+  font-weight: 700;
+}
+.btn-primary:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,0.6); }
+
+/* Hero preview card */
+.hero-card, .card-glass {
+  width: 100%;
+  max-width: 360px;
+  padding: 14px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  box-shadow: none;
+  transition: transform var(--mid), box-shadow var(--mid);
+}
+.hero-card:hover { transform: translateY(-6px); }
+.hero-card .preview img { width: 100%; height: 220px; object-fit: cover; border-radius: 10px; display: block; }
+
+/* Section title */
+.section-title {
+  margin: 28px 0 12px;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Product grid */
+.product-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(1, 1fr);
+  margin-bottom: 48px;
+}
+.product-card {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--surface);
+  border: 1px solid rgba(255,255,255,0.02);
+  transition: transform var(--mid), box-shadow var(--mid), background var(--mid);
+  display: flex;
+  flex-direction: column;
+  min-height: 120px;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-min);
+}
+
+/* Image wrap uses background-image inline style in HTML */
+.image-wrap {
+  position: relative;
+  min-height: 220px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  transition: transform var(--mid);
+}
+.product-card:hover .image-wrap { transform: scale(1.01); }
+
+/* Favorite button */
+.fav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.04);
+  color: var(--text);
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform var(--fast), background var(--fast);
+}
+.fav:hover { transform: translateY(-3px); background: rgba(255,255,255,0.08); color: #000; }
+
+/* Card controls */
+.card-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: auto;
+}
+.card-controls .btn {
+  backdrop-filter: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  color: var(--muted);
+  padding: 10px 12px;
+  min-height: 44px;
+}
+.card-controls .btn:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+
+/* Product body */
+.p-body { padding: 16px; }
+.p-top { display:flex; justify-content: space-between; align-items: center; gap: 8px; }
+.p-title { margin: 0; font-size: 16px; font-weight: 700; color: var(--text); }
+.p-price { color: var(--text); font-weight: 800; }
+.p-desc { color: var(--muted); margin: 8px 0 12px; font-size: 14px; }
+
+/* Tags */
+.tag-soft {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.03);
+  color: var(--muted);
+  padding: 6px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  margin-right: 6px;
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.72);
+  animation: fadeIn var(--fast) var(--ease) both;
+  z-index: 60;
+}
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+
+.modal-card {
+  width: min(920px, 96%);
+  max-height: 86vh;
+  overflow: auto;
+  padding: 18px;
+  border-radius: 18px;
+  background-color: var(--surface);
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: var(--shadow-subtle);
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+}
+.modal-close:hover { color: var(--text); transform: translateY(-2px); }
+
+/* Modal grid / responsive handled below */
+.modal-grid { display: grid; gap: 18px; grid-template-columns: 1fr; }
+.modal-media img { width: 100%; height: 360px; object-fit: cover; border-radius: 12px; }
+.modal-content h2 { margin: 0; font-size: 20px; font-weight: 700; color: var(--text); }
+.muted { color: var(--muted); }
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid rgba(255,255,255,0.03);
+  padding: 24px 0 10px;
+  margin-top: 40px;
+  background: transparent;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+.footer-links a {
+  color: var(--muted);
+  margin-left: 12px;
+  text-decoration: none;
+  font-size: 14px;
+}
+.lower {
+  border-top: 1px solid rgba(255,255,255,0.02);
+  margin-top: 16px;
+  padding: 14px 0 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Glass helper replaced with flat surface */
+.glass {
+  background-color: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 10px;
+}
+
+/* Small niceties */
+input, button, a { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+/* Responsive: tablets and up */
+@media (min-width: var(--bp-sm)) {
+  .hero-grid { grid-template-columns: 1fr 360px; align-items: center; }
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+  .modal-grid { grid-template-columns: 1fr 1fr; }
+  .hero-title { font-size: 34px; }
+}
+
+/* Desktop wide */
+@media (min-width: var(--bp-lg)) {
+  .product-grid { grid-template-columns: repeat(3, 1fr); }
+  .hero-title { font-size: 40px; }
+  .container { max-width: 1400px; }
+}
+
+/* Accessibility: keyboard focus for cards and actionable elements */
+.product-card:focus-within, .product-card:hover {
+  outline: none;
+  box-shadow: var(--shadow-min);
+  transform: translateY(-6px);
+}
+
+/* Reduced opacity disabled state hint (for future use) */
+.is-disabled { opacity: 0.5; pointer-events: none; }
+
+/* Fine grain adjustments for small screens and improved mobile usability */
+@media (max-width: 700px) {
+  /* Increase base text size slightly for readability */
+  body { font-size: 16px; }
+
+  /* Use single-column everywhere on phones */
+  .product-grid { grid-template-columns: 1fr; gap: 18px; margin-bottom: 56px; }
+
+  /* Bigger tap targets */
+  button, .icon-btn, .cart-btn, .fav, .card-controls .btn {
+    min-height: 48px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 15px;
+  }
+
+  /* Simplify header: hide search input to reduce clutter */
+  .search input { display: none; width: 0; padding: 0; margin: 0; }
+  .search { padding: 6px; gap: 8px; }
+
+  /* More comfortable header spacing */
+  .header-inner { padding: var(--space-sm) 0; gap: var(--space-md); }
+
+  /* Hide the hero preview to reduce visual weight on small screens */
+  .hero-right { display: none; }
+
+  /* Increase hero spacing and slightly larger, but not overpowering title */
+  .hero { padding: var(--space-xxl) 0 var(--space-lg); }
+  .hero-title { font-size: 24px; }
+  .hero-sub { font-size: 15px; }
+
+  /* Product card adjustments for tap friendliness */
+  .product-card { padding-bottom: 8px; min-height: 160px; }
+  .image-wrap { min-height: 200px; padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.02); }
+
+  /* Larger product body padding and spacing */
+  .p-body { padding: 18px; }
+  .p-title { font-size: 17px; }
+  .p-desc { font-size: 15px; line-height: 1.4; }
+
+  /* Make controls more prominent and easy to tap */
+  .card-controls { gap: 10px; }
+  .card-controls .btn { padding: 12px 14px; min-width: 56px; }
+
+  /* Reduce visual noise: remove nonessential borders and shadows */
+  .product-card, .hero-card, .modal-card {
+    border: 1px solid rgba(255,255,255,0.02);
+    box-shadow: none;
+    background-color: var(--surface);
+  }
+
+  /* Fav button larger & easier to hit */
+  .fav { padding: 12px; right: 12px; top: 12px; }
+
+  /* Modal full-screen-like feel on mobile */
+  .modal-card {
+    width: calc(100% - 24px);
+    height: 92vh;
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .modal-media img { height: 260px; border-radius: 10px; }
+
+  /* Increase footer spacing */
+  .site-footer { padding: 28px 0 14px; }
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .lower { text-align: left; width: 100%; padding-top: 12px; }
+}
+
+/* Fine grain adjustments for very small screens */
+@media (max-width: 420px) {
+  body { font-size: 16px; }
+  .hero-title { font-size: 20px; }
+  .hero { padding-top: 28px; padding-bottom: 18px; }
+  .container { width: 95%; }
+
+  /* Make primary CTA full width for easier tapping */
+  .hero-cta { flex-direction: column; gap: 10px; align-items: stretch; }
+  .btn-primary { width: 100%; padding: 14px 16px; font-size: 16px; }
+
+  /* Product card elements more spaced */
+  .p-body { padding: 16px; }
+  .image-wrap { min-height: 180px; }
+
+  /* Make icon buttons easier to press */
+  .icon-btn, .cart-btn { padding: 12px; min-width: 48px; min-height: 48px; }
+
+  /* Hide some less important footer links to reduce clutter */
+  .footer-links { display: none; }
+}
+
+/* End of file */
